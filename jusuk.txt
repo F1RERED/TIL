@@ -1,0 +1,162 @@
+$ git init
+"""
+= 나 깃 이제 시작할거야
+.git은 숨김폴더라 어차피 안 떠. 폴더 들어가서 뭐 할 거 없음
+micka@DESKTOP-SQR4L91 MINGW64 ~/OneDrive/Desktop/Git/2 (master)
+혹은 (main)
+이렇게 바뀌면 깃 잘 작동 된 것
+"""
+
+$ git config --global init.defaultBranch main
+$ rm -rf .git
+$ git init
+"""
+라고 쓰면 (main)으로 바뀜
+"""
+"""
+버전 기록할 것
+
+그럴러면 파일 버전을 남겨놔야함
+"""
+ $ touch a.txt
+
+
+ $ git status
+ "
+ On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        a.txt
+        jusuk
+; 빨간 글씨
+
+nothing added to commit but untracked files present (use "git add" to track)
+"
+
+ $ git add .
+ 나 여기 있는 모든 파일 전부 add 할거야
+ . = 모든 파일
+
+ $ git status
+ "
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   a.txt
+        new file:   jusuk
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   jusuk
+        ; 빨간글씨
+        
+        "
+
+$ git commit -m '첫번째 커밋'
+"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'micka@DESKTOP-SQR4L91.(none)')
+"
+-m은 메세지
+이 메세지의 내용은 버전을 기록할 건데
+그 전에 니가 누군데? 누군지 말해줘
+계정 등록해줘 라는 의미
+
+
+git config --global user.email "mickale1023@gmail.com"
+git config --global user.name "F1RERED"
+내 깃허브 계정 등록
+;  터미널 창에 화살표 위로 하면 이전 명령어 뜸
+
+
+$ git commit -m '첫번째 커밋'
+[main (root-commit) 5013ffe] 첫번째 커밋
+ 2 files changed, 24 insertions(+)
+ create mode 100644 a.txt
+ create mode 100644 jusuk
+
+커밋 성공적.
+
+micka@DESKTOP-SQR4L91 MINGW64 ~/OneDrive/Desktop/Git/2 (main)
+$ git log
+commit 5013ffe06b89e556fac475e27381b83ead29d19b (HEAD -> main)
+Author: F1RERED <mickale1023@gmail.com>
+Date:   Wed Jun 7 14:35:14 2023 +0900
+
+    첫번째 커밋
+
+micka@DESKTOP-SQR4L91 MINGW64 ~/OneDrive/Desktop/Git/2 (main)
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   jusuk
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+
+
+
+명령어 의미 찾아보기
+
+git init : 깃 시작. 정확히는 깃 저장소 초기화. 
+ Git으로 관리할 수 있는 상태로 만들어주는 명령어
+git add .(or 파일이름) : 현재 변경된 파일들을 모으는 작업. . = 모든 파일 모음
+git commit -m '메시지' : 
+git add로 모아진 파일들의 버전을 남기는 명령어. 
+메시지는 커밋에 대한 설명을 작성한다.
+= 메세지라는 버전을 남김
+git status : 디렉토리의 상태를 보여줌. git 상태 확인 
+git log : commit한 기록을 보여줌.  버전이 기록된것을 확인
+
+이전 버전에 파일 3개
+근데 2개 수정했어. 수정한 작업을 하는 공간을 working directory라고 부름
+그럼 이 변화사항들을 잠시 모아서 임시버전 같은 걸 만들어 주는 것이 add
+이 공간을 staging area라고 부름. 임시적 공간
+이걸 commit 하면 새 버전으로 갱신하는 
+
+
+$ git status
+ nothing to commit, working tree clean
+ 변경사항이 없다. 갱신할 내용 없다는 뜻
+ Changes not staged for commit
+ 변경되었으나 staging area로 가진 않았다. 
+ 현재 작업중인, 열려있는 텍스트 파일 같은 거
+
+ 왼쪽 바에 돋보기(검색) 밑에 동글라미 3개 연결된 것 누르면
+ 명령어 없이도 스테이징 에리어 및 commit 혹은 스테이징에리어에서 내리기 등을
+ 버튼 클릭으로 할 수 있다
+
+
+깃은 스냅샷 형태로 관리
+스냅샷 = 사진으로 찍어서 
+파일을 복제 하는 게 아니라 버전을 보고 있고
+언제 찍힌 사진인지를 보고 관리
+
+$ git log -1
+최근 1개. x개
+
+
+프로젝트를 만들 때에는 .git이 이미 있는 폴더나 그 하위 폴더에는 만들면 안됨
+상위폴더도 지양
+다른 루트의 폴더에 프로젝트 시작
